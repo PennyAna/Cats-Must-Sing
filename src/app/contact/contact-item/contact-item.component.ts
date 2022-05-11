@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Contact } from '../contact.model';
 
 @Component({
@@ -7,10 +7,10 @@ import { Contact } from '../contact.model';
   styleUrls: ['./contact-item.component.css']
 })
 export class ContactItemComponent implements OnInit {
-  contact: Contact | undefined;
+  // contact: Contact | undefined;
+  @Input() contact: Contact | undefined;
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="col-xs-12 panel-heading clearfix">
-            <h2>{{ contact?.name }}</h2>
+            <h2>{{ selectedContact?.name }}</h2>
         </div>
         <div class="pull-right btn-toolbar">
             <a class="btn btn-primary">Edit</a>
@@ -9,18 +9,19 @@
         </div>
     <div class="panel-body">
         <div class="pull-left col-xs-4">
-            <img [src]="contact?.imageUrl" 
-            alt="{{ contact?.name }}" class="img-responsive" 
-            *ngIf="contact?.imageUrl">
+            <img [src]="selectedContact?.imageUrl" 
+            alt="{{ selectedContact?.name }}" class="img-responsive" 
+            *ngIf="selectedContact?.imageUrl">
         </div>
         <div class="col-xs-8">
             <div class="list-group-item-heading">
-                    Email:  {{ contact?.email }}
+                    Email:  {{ selectedContact?.email }}
             </div>
             <div class="list-group-item-heading">
-                    Phone: {{ contact?.phone }}
+                    Phone: {{ selectedContact?.phone }}
             </div>
         </div>
     </div>
     </div>
 </div>
+

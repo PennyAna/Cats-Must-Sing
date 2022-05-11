@@ -14,8 +14,7 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 margin-top">
-          <app-contact-item></app-contact-item>
-      <!--*ngFor="let contactEl of contacts" [contact]="contactEl" (contactSelected)="onContactSelected(contactEl)"></app-contact-item> -->
+          <app-contact-item *ngFor="let contactEl of contacts" [contact]="contactEl" (click)="contactWasSelected(contactEl)"></app-contact-item>
         </div>
       </div>
     </div>
