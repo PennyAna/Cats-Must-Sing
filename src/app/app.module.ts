@@ -11,6 +11,7 @@ import { MessageComponent } from './message/message.component';
 import { ContactItemComponent } from './contact/contact-item/contact-item.component';
 import { DocumentDetailComponent } from './document/document-detail/document-detail.component';
 import { DocumentListComponent } from './document/document-list/document-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,13 @@ import { DocumentListComponent } from './document/document-list/document-list.co
     ContactItemComponent,
     ContactDetailComponent,
     DocumentComponent,
-    MessageComponent,
     DocumentDetailComponent,
-    DocumentListComponent
+    DocumentListComponent, 
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
