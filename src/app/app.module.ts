@@ -15,6 +15,7 @@ import { DocumentDetailComponent } from './document/document-detail/document-det
 import { DocumentListComponent } from './document/document-list/document-list.component';
 
 import { MessageComponent } from './message/message.component';
+import { DocumentItemComponent } from './document/document-list/document-item/document-item.component';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { MessageComponent } from './message/message.component';
     DocumentComponent,
     DocumentDetailComponent,
     DocumentListComponent, 
-    MessageComponent,
+    MessageComponent, DocumentItemComponent,
   ],
   imports: [
     BrowserModule,
