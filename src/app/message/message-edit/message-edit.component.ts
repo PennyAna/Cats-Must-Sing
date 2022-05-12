@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Message } from '../message.model';
 
 @Component({
@@ -7,7 +8,14 @@ import { Message } from '../message.model';
   styleUrls: ['./message-edit.component.css']
 })
 export class MessageEditComponent implements OnInit {
+
 @Input() message: Message | undefined;
+onSendMessage() {
+  
+}
+onClear() {
+  
+}
   constructor() { }
 
   ngOnInit(): void {
