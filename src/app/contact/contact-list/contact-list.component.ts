@@ -16,7 +16,7 @@ contacts: Contact[] = [
   ngOnInit() {
   }
   contactWasSelected(contact: Contact) {
-    this.selectedContact.emit();
+    this.selectedContact.emit(contact);
   }
 
 }
