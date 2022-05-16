@@ -1,1 +1,25 @@
-<p>document-detail works!</p>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="col-xs-12 panel-heading clearfix">
+            <h2>{{ selectedDocument?.name }}</h2>
+            <h3>{{ selectedDocument?.id }}</h3>
+        </div>
+        <div class="pull-right btn-toolbar">
+            <a class="btn btn-primary">Edit</a>
+            <a class="btn btn-danger">Delete</a>
+        </div>
+    <div class="panel-body">
+        <div class="pull-left col-xs-4">
+        </div>
+        <div class="col-xs-8">
+            <div class="list-group-item-heading">
+                    Link: {{ selectedDocument?.url }}
+            </div>
+            <div class="list-group-item-heading">
+                    Description: {{ selectedDocument?.description }}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+

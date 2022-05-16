@@ -9,7 +9,7 @@
     </div>
     <div class="panel-body">
         <div class="center-panel">
-       <cms-document-list *ngIf="let documentEl of documents"></cms-document-list>
-        </div>
+       <cms-document-item *ngFor="let documentEl of documents" [document]="documentEl" (click)="documentWasSelected(documentEl)"></cms-document-item>
+    </div>
     </div>
 </div>

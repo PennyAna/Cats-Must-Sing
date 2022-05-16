@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, ElementRef, Output } from '@angular/core';
 import { Message } from '../message.model';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'cms-message-edit',

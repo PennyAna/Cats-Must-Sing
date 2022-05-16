@@ -13,9 +13,9 @@ import { ContactItemComponent } from './contact/contact-item/contact-item.compon
 import { DocumentComponent } from './document/document.component';
 import { DocumentDetailComponent } from './document/document-detail/document-detail.component';
 import { DocumentListComponent } from './document/document-list/document-list.component';
+import { DocumentItemComponent } from './document/document-item/document-item.component';
 
 import { MessageComponent } from './message/message.component';
-import { DocumentItemComponent } from './document/document-list/document-item/document-item.component';
 import { MessageListComponent } from './message/message-list/message-list.component';
 import { MessageItemComponent } from './message/message-item/message-item.component';
 import { MessageEditComponent } from './message/message-edit/message-edit.component';
@@ -32,7 +32,11 @@ import { MessageEditComponent } from './message/message-edit/message-edit.compon
     DocumentComponent,
     DocumentDetailComponent,
     DocumentListComponent, 
-    MessageComponent, DocumentItemComponent, MessageListComponent, MessageItemComponent, MessageEditComponent,
+    DocumentItemComponent,
+    MessageComponent, 
+    MessageListComponent, 
+    MessageItemComponent, 
+    MessageEditComponent,
   ],
   imports: [
     BrowserModule,

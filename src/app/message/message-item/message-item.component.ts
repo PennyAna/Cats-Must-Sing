@@ -7,7 +7,7 @@ import { Message } from '../message.model';
   styleUrls: ['./message-item.component.css']
 })
 export class MessageItemComponent implements OnInit {
-@Input() message: Message |undefined;
+@Input() message: Message;
   constructor() { }
 
   ngOnInit(): void {
