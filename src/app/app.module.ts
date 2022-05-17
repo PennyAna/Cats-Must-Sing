@@ -19,6 +19,7 @@ import { MessageComponent } from './message/message.component';
 import { MessageListComponent } from './message/message-list/message-list.component';
 import { MessageItemComponent } from './message/message-item/message-item.component';
 import { MessageEditComponent } from './message/message-edit/message-edit.component';
+import { MessageDetailComponent } from './message/message-detail/message-detail.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MessageEditComponent } from './message/message-edit/message-edit.compon
     MessageComponent, 
     MessageListComponent, 
     MessageItemComponent, 
-    MessageEditComponent,
+    MessageEditComponent, 
+    MessageDetailComponent,
   ],
   imports: [
     BrowserModule,

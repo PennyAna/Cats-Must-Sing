@@ -1,1 +1,11 @@
-<cms-message-list></cms-message-list>
+<!DOCTYPE html>
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <cms-message-list (selectedMessage)="selectedMessage = $event"></cms-message-list>
+        </div>
+        <div class="col-md-7">
+            <cms-message-detail *ngIf="selectedMessage" [selectedMessage]="selectedMessage"></cms-message-detail>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,7 @@ import { Message } from '../message.model';
 })
 export class MessageEditComponent implements OnInit {
 
-@Input() message: Message | undefined;
+@Input() message: Message;
 
 @ViewChild('msgText') msgText: ElementRef;
 @ViewChild('subject') subject: ElementRef;
