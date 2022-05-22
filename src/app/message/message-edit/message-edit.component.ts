@@ -20,12 +20,12 @@ onSendMessage() {
     const msgTextValue = this.msgText?.nativeElement.value;
 
     const message = new Message(
-      '5', 
+      this.currentId, 
       subjectValue, 
       msgTextValue, 
       this.currentSender);
       this.addMessageEvent.emit(message);
-      this.onClear(); 
+      this.onClear();
 }
 onClear(): void {
   this.subject.nativeElement.value = ' ';

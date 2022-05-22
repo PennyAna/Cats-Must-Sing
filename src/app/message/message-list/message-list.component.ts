@@ -16,6 +16,9 @@ messages: Message[] = [
   new Message('4', 'Help with Assignment3', 'Can I meet with you sometime. I need help with assignment 3.', 'Mark Smith'),
 ];
 onAddMessage(message: Message) {
+ 
+  //implement the code in this method to push the Message object pass as an argument to the end of the message list
+this.messages.push(message);
 }
 messageWasSelected(message: Message) {
     this.selectedMessage.emit(message);
