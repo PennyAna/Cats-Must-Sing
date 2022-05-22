@@ -15,4 +15,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+onLogIn() {
+
+}
+onOther() {
+
+}
+onLogOut() {
+
+}
 }

@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { DropDownDirective } from './shared/dropdown.directive';
 
 import { ContactComponent } from './contact/contact.component';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
@@ -22,6 +23,7 @@ import { MessageEditComponent } from './message/message-edit/message-edit.compon
 import { MessageDetailComponent } from './message/message-detail/message-detail.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,8 @@ import { MessageDetailComponent } from './message/message-detail/message-detail.
     MessageListComponent, 
     MessageItemComponent, 
     MessageEditComponent, 
-    MessageDetailComponent,
+    MessageDetailComponent, 
+    DropDownDirective
   ],
   imports: [
     BrowserModule,
