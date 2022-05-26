@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { EventEmitter } from 'stream';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 @Injectable({
@@ -16,14 +15,7 @@ export class ContactService {
     return this.contacts.slice();
   }
   getContact(id: string): Contact {
-    for(let i=0; i <= this.contacts.length; i++) {
-      if (this.contacts[i].id == id) {
-        return this.contacts[i];
-      }
-      else {
-        return null;
-      }
-      }
+    return this.contacts.find(contact => contact.id === id)
     }
     
     }
