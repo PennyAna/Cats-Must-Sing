@@ -12,7 +12,6 @@ export class MessageListComponent implements OnInit {
 @Output()selectedMessageEvent = new EventEmitter<Message>();
 messages: Message[] = [];
 onAddMessage(message: Message) {
- 
   //implement the code in this method to push the Message object pass as an argument to the end of the message list
 this.messages.push(message);
 }
@@ -23,6 +22,6 @@ constructor(private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.messages = this.messageService.getMessages();
+    this.messageService.messageChangedEvent.subscribe((messages: Message[]) =>{this.messages = messages;})
   }
-
 }
