@@ -22,6 +22,9 @@ import { MessageItemComponent } from './message/message-item/message-item.compon
 import { MessageEditComponent } from './message/message-edit/message-edit.component';
 import { MessageDetailComponent } from './message/message-detail/message-detail.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DocumentEditComponent } from './document/document-edit/document-edit.component';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
 
 
 
@@ -42,7 +45,7 @@ import { AppRoutingModule } from './app-routing.module';
     MessageItemComponent, 
     MessageEditComponent, 
     MessageDetailComponent, 
-    DropDownDirective
+    DropDownDirective, PageNotFoundComponent, DocumentEditComponent, ContactEditComponent
   ],
   imports: [
     BrowserModule,
