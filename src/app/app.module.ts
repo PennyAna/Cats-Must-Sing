@@ -21,6 +21,7 @@ import { MessageListComponent } from './message/message-list/message-list.compon
 import { MessageItemComponent } from './message/message-item/message-item.component';
 import { MessageEditComponent } from './message/message-edit/message-edit.component';
 import { MessageDetailComponent } from './message/message-detail/message-detail.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -46,6 +47,7 @@ import { MessageDetailComponent } from './message/message-detail/message-detail.
   imports: [
     BrowserModule,
     NgbModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

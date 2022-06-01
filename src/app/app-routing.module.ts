@@ -6,18 +6,18 @@ import { DocumentComponent } from './document/document.component';
 import { ContactComponent } from './contact/contact.component';
 import { MessageListComponent } from './message/message-list/message-list.component';
 
-const appRoutes: Routes = [
+const routes: Routes = [
   { path: '', redirectTo: '/document', pathMatch: 'full' }, 
-  { path: 'documents', component: DocumentComponent }, 
-  { path: 'messages', component: MessageListComponent }, 
-  { path: 'contacts', component: ContactComponent }
+  { path: 'document', component: DocumentComponent }, 
+  { path: 'message', component: MessageListComponent }, 
+  { path: 'contact', component: ContactComponent }
 ];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule, 
-    [RouterModule.forRoot(appRoutes)], 
+    [RouterModule.forRoot(routes)], 
   ], 
   exports: [RouterModule]
 })
