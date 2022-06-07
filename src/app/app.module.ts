@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -45,12 +46,16 @@ import { ContactEditComponent } from './contact/contact-edit/contact-edit.compon
     MessageItemComponent, 
     MessageEditComponent, 
     MessageDetailComponent, 
-    DropDownDirective, PageNotFoundComponent, DocumentEditComponent, ContactEditComponent
+    DropDownDirective, 
+    PageNotFoundComponent, 
+    DocumentEditComponent, 
+    ContactEditComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
