@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<a href="#" class="list-group-item clearfix">
+<a [routerLink]="['/message', message.id]" class="list-group-item clearfix">
   <div class="">
     <span class="messageHeader">{{ message?.sender }}</span>
     <div class="messageText">{{ message?.msgText }}</div>
