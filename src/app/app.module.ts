@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -26,7 +27,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DocumentEditComponent } from './document/document-edit/document-edit.component';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
-
 
 
 @NgModule({
@@ -56,6 +56,7 @@ import { ContactEditComponent } from './contact/contact-edit/contact-edit.compon
     NgbModule,
     AppRoutingModule,
     FormsModule,
+    DndModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

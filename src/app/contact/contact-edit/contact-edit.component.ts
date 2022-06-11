@@ -20,8 +20,33 @@ export class ContactEditComponent implements OnInit {
   phoneInput: string;
   imageInput: string; 
   newContact: Contact;
+  addToGroup($event: any) {
+    const selectedContact: Contact = $event.dragData;
+    const invalidGroupContact = this.isInvalidContact(selectedContact);
+    if(invalidGroupContact) {
+      return;
+    }
+    this.groupContacts.push(selectedContact);
+  }
+  isInvalidContact(newContact: Contact) {
+    if(!newContact) {
+      return true;
+    }
+    if(this.contact && newContact.id === this.contact.id) {
+      return true;
+    }
+    for(let i = 0; i < this.groupContacts.length; i++) {
+      if(newContact.id === this.groupContacts[i].id) {
+        return true;
+      }
+    }
+    return false;
+  }
 onRemoveItem(index: number) {
-
+  if(index < 0 || index >= this.groupContacts.length) {
+    return;
+  }
+  this.groupContacts.splice(index, 1);
 }
 onCancel() {
   this.router.navigate(["../contact"])
