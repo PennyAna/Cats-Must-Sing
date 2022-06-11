@@ -2,6 +2,31 @@ import {Document} from './document.model';
 
 export const MOCKDOCUMENTS: any[] = [
   {
+    id: '3000', 
+    name: 'Restrained Chaos: Portfolio', 
+    url: 'https://pennyana.github.io/restrainedchaos/', 
+    children: []
+  },
+  {
+     id: '844', 
+     name: 'TMBG', 
+     description: 'Since the dawn of time, They Might Be Giants has been providing free music through the Dial-A-Song service. It is currently available in traditional form at (844) 387-6962 or right here on this site. ',
+     url: 'https://dialasong.com',
+     children: []
+  },
+  {
+    id: '8383', 
+    name: 'ngMeme', 
+    url: 'https://www.memecreator.org/static/images/memes/5311693.jpg',
+    children: []
+  },
+  {
+    id: '58', 
+    name: 'What If: How Many Bananas Will Power A House?', 
+    url: 'https://what-if.xkcd.com/158/',
+    children: [] 
+  }, 
+  {
     id: '1',
     name: 'CIT 425 - Data Warehousing',
     url: 'https://rkjdatawarehousing.wordpress.com/',

@@ -1,15 +1,22 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <form id="contact-edit">
+    <form id="contact-edit" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="name">Name:</label>
           <input
             type="text"
             id="name"
-            class="form-control required"
+            name="name"
+            class="form-control"
             size="120"
-            max="120">
+            required
+            max="120"
+            [ngModel]="contact?.name"
+            #name="ngModel">
+            <span style="color: red" [hidden]="!name.invalid && name.touched">
+            <div class="alert alert-danger">Name is required.</div>
+          </span>
         </div>
       </div>
 
@@ -19,9 +26,17 @@
           <input
             type="text"
             id="email"
-            class="form-control required"
+            name="email"
+            class="form-control"
             size="120"
-            max="255">
+            max="255"
+            required
+            [ngModel]="contact?.email"
+            #email="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <span style="color: red" [hidden]="!email.invalid && email.touched">
+              <div class="alert alert-danger">Enter a valid email address.</div>
+            </span>
         </div>
       </div>
 
@@ -31,10 +46,16 @@
           <input
             type="text"
             id="phone"
+            name="phone"
             class="form-control invalid"
             size="150"
-            max="255">
-
+            max="255"
+            [ngModel]="contact?.phone"
+            #phone="ngModel"
+            pattern="\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*">
+            <span style="color: red" [hidden]="!phone.invalid && phone.touched">
+              <div class="alert alert-danger">Enter a valid phone number.</div>
+            </span>
         </div>
       </div>
 
@@ -44,9 +65,12 @@
           <input
             type="text"
             id="imageUrl"
+            name="imageUrl"
             class="form-control"
             size="150"
-            max="255">
+            max="255"
+            [ngModel]="contact?.imageUrl"
+            #imageUrl="ngModel">
         </div>
       </div>
 
@@ -72,7 +96,7 @@
 
       <div class="row">
         <div class="col-xs-12 btn-toolbar">
-          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">Save</button>a
           <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
         </div>
       </div>

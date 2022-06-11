@@ -279,3 +279,5 @@ export const MOCKCONTACTS: Contact[] = [
   ]
   }
 ];
+
+//groupImg.png from https://www.seekpng.com/ima/u2y3q8y3a9w7e6u2/

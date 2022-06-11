@@ -44,7 +44,7 @@ export class ContactService {
       this.contacts.splice(pos, 1);
       this.contactChangedEvent.emit(this.contacts.slice());
     }
-  addDocument(newContact: Contact) {
+  addContact(newContact: Contact) {
     if(!newContact){
       return;
     }
@@ -54,7 +54,7 @@ export class ContactService {
     this.contactsListClone = this.contacts.slice();
     this.contactListChangedEvent.next(this.contactsListClone);
   }
-  updateDocument(originalContact: Contact, newContact: Contact) {
+  updateContact(originalContact: Contact, newContact: Contact) {
     if (originalContact && newContact) {
       return;
     }
