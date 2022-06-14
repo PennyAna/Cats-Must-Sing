@@ -6,7 +6,7 @@
   .invalid.ng-invalid.ng-dirty {
     border: 1px solid red;
   }
-  input.ng-invalid {
+  input.required {
     border: 1px solid red;
   }
   

@@ -55,7 +55,8 @@ export class ContactService {
     this.contactListChangedEvent.next(this.contactsListClone);
   }
   updateContact(originalContact: Contact, newContact: Contact) {
-    if (originalContact && newContact) {
+    console.log(newContact, originalContact);
+    if (originalContact === newContact) { //this was the bug, it used to be original && new, thus the rest of the function never executed
       return;
     }
     const pos = this.contacts.indexOf(originalContact);
@@ -65,7 +66,8 @@ export class ContactService {
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
     this.contactsListClone = this.contacts.slice();
-  this.contactListChangedEvent.next(this.contactsListClone);
+    this.contactListChangedEvent.next(this.contactsListClone);
+    console.log(newContact, originalContact);
   }
   }
   

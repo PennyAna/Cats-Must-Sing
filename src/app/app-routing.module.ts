@@ -55,7 +55,7 @@ children: [
   ] 
 }, 
   { path: '', redirectTo: '/document', pathMatch: 'full' }, //redirect to document
- // { path: '**', component: PageNotFoundComponent }, //Wildcard route for 404 page
+  { path: '404', component: PageNotFoundComponent }, //Wildcard route for 404 page
 ];
 
 @NgModule({
