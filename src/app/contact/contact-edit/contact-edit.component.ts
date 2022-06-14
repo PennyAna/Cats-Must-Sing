@@ -16,6 +16,7 @@ export class ContactEditComponent implements OnInit {
   id: string;
   editMode: boolean = false;
   groupContacts: Contact[];
+  invalidFlag: boolean;
   nameInput: string;
   emailInput: string; 
   phoneInput: string;
@@ -25,9 +26,11 @@ export class ContactEditComponent implements OnInit {
     const selectedContact: Contact = $event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
     if (invalidGroupContact){
+      this.invalidFlag = true;
        return;
     }
     this.groupContacts.push(selectedContact);
+    this.invalidFlag = false;
  }
   isInvalidContact(newContact: Contact) {
     if (!newContact) {// newContact has no value

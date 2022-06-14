@@ -21,7 +21,11 @@
                     Phone: {{ selectedContact?.phone }}
             </div>
         </div>
+        <div class="row" style="min-height: 3rem;">
+            <div *ngFor="let groupContact of selectedContact?.group; let i = index">
+                <cms-contact-item class="col-sm-11" [contact]="groupContact"></cms-contact-item>
+            </div>
+        </div>
     </div>
     </div>
-</div>
-
+    </div>
