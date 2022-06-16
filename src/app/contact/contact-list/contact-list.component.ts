@@ -9,6 +9,10 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit, OnDestroy{
+  term: string;
+  search(value: string) {
+    this.term = value;
+  }
   private subscription: Subscription;
   @Output() selectedContactEvent = new EventEmitter<Contact>();
   contacts: Contact[] = [];
