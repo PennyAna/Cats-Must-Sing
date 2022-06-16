@@ -12,10 +12,8 @@ export class MessageComponent implements OnInit {
 selectedMessage: Message;
 changedMessage: Message;
   constructor(private messageService: MessageService) { }
-
   ngOnInit(): void {
     this.messageService.messageSelectedEvent.subscribe((message: Message) => {this.selectedMessage = message; })
     this.messageService.messageChangedEvent.subscribe((message: Message) => {this.changedMessage = message; })
   }
-
 }

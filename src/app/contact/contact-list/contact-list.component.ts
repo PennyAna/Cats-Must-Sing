@@ -10,25 +10,22 @@ import { ContactService } from '../contact.service';
 })
 export class ContactListComponent implements OnInit, OnDestroy{
   term: string;
-  search(value: string) {
-    this.term = value;
-  }
   private subscription: Subscription;
   @Output() selectedContactEvent = new EventEmitter<Contact>();
   contacts: Contact[] = [];
   contactId: string = '';
+  search(value: string) {
+    this.term = value;
+  }
   constructor(private contactService: ContactService) {
-    this.contacts = this.contactService.getContacts();
    }
   ngOnInit(): void {
     this.subscription = this.contactService.contactListChangedEvent.subscribe((contactsList: Contact[])=> {
       this.contacts = contactsList;
     });
-   this.contactService.contactChangedEvent.subscribe((contactArray: Contact[])=>{
-      this.contacts = contactArray;
-    });
+    this.contactService.getContacts();
+    }
  // this.contacts = this.contactService.getContacts();
-  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
 }

@@ -19,9 +19,8 @@ onSelected(message: Message) {
     this.messageService.messageSelectedEvent.emit(message);
 }
 constructor(private messageService: MessageService) { }
-
   ngOnInit(): void {
-    this.messages = this.messageService.getMessages();
+    this.messageService.getMessages();
     this.messageService.messageChangedEvent.subscribe((messages: Message[]) =>{this.messages = messages;})
   }
 }

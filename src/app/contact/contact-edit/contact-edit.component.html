@@ -14,7 +14,7 @@
             max="120"
             [ngModel]="contact?.name"
             #name="ngModel">
-            <span style="color: red" [hidden]="!name.invalid && name.touched || editMode">
+            <span [ngStyle]="{'border':!name.invalid ? '1px solid red' : '1px solid black', 'display':!name.invalid || name.pristine ? 'none' : 'block'}">
             <div class="alert alert-danger">Name is required.</div>
           </span>
         </div>
@@ -34,7 +34,7 @@
             [ngModel]="contact?.email"
             #email="ngModel"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-            <span style="color: red" [hidden]="!email.invalid && email.touched || editMode">
+            <span [ngStyle]="{'border':!email.invalid ? '1px solid red' : '1px solid black', 'display':!email.invalid || email.pristine ? 'none' : 'block'}">
               <div class="alert alert-danger">Enter a valid email address.</div>
             </span>
         </div>
@@ -53,7 +53,7 @@
             [ngModel]="contact?.phone"
             #phone="ngModel"
             pattern="\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*">
-            <span style="color: red" [hidden]="!phone.invalid && phone.touched || editMode">
+            <span [ngStyle]="{'border':!phone.invalid ? '1px solid red' : '1px solid black', 'display':!phone.invalid || phone.pristine ? 'none' : 'block'}">
               <div class="alert alert-danger">Enter a valid phone number.</div>
             </span>
         </div>

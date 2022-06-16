@@ -8,9 +8,7 @@ import { MessageService } from '../message.service';
   styleUrls: ['./message-edit.component.css']
 })
 export class MessageEditComponent implements OnInit {
-
 @Input() message: Message;
-
 @ViewChild('msgText') msgText: ElementRef;
 @ViewChild('subject') subject: ElementRef;
 @Output() addMessageEvent = new EventEmitter<Message>();
@@ -35,9 +33,6 @@ onClear(): void {
   this.msgText.nativeElement.value = ' ';
 }
   constructor(private messageService: MessageService) { }
-
   ngOnInit(): void {
-    
   }
-
 }

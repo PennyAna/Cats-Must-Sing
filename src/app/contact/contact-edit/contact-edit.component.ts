@@ -70,7 +70,6 @@ onSubmit(f: NgForm) {
   this.router.navigate(["../contact"]);
 }
   constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) { }
-
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);

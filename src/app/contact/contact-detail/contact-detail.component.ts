@@ -13,17 +13,16 @@ export class ContactDetailComponent implements OnInit {
   groupContact: Contact[];
   id: string;
   //contact: Contact = new Contact('1', 'R. Kent Jackson', 'jacksonk@byui.edu', '208-496-3771', '../../../assets/images/jacksonk.jpg', null);
-  constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) { }
-
+  onDelete() {
+    this.contactService.deleteContact(this.selectedContact);
+//route back to '/documents' URL
+    this.router.navigate(["../contact"])
+  }constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);
       this.selectedContact = this.contactService.getContact(this.id);
     });
   }
-  onDelete() {
-    this.contactService.deleteContact(this.selectedContact);
-//route back to '/documents' URL
-    this.router.navigate(["../contact"])
-  }
+
 }

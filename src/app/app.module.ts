@@ -28,7 +28,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DocumentEditComponent } from './document/document-edit/document-edit.component';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
 import { ContactFilterPipe } from './contact/contact-filter.pipe';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -59,6 +59,7 @@ import { ContactFilterPipe } from './contact/contact-filter.pipe';
     AppRoutingModule,
     FormsModule,
     DndModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

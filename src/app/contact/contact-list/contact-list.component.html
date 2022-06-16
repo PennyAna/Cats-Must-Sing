@@ -11,6 +11,9 @@
             <input type="text" class="search-box form-control" placeholder="Enter a search value" #searchBox (keyup)="search(searchBox.value)">
             <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
           </div>
+          <div ng-controller="myCtrl">
+            <span ng-bind-html="html"></span>
+            </div>
         <div class="pull-right pad-left-right">
           <a [routerLink]="['new']" class="btn btn-success">New Contact</a>
       </div>
@@ -19,10 +22,11 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-12 margin-top">
+           
             <cms-contact-item *ngFor="let contact of contacts | contactFilter:term" 
                                             [contact]="contact"
                                             dnd-draggable [dragEnabled]="true" [dragData]="contact" [dropZones]="['contactGroup']">
-            </cms-contact-item>
+          </cms-contact-item>
           </div>
         </div>
       </div>
@@ -30,6 +34,3 @@
   </div>
 </div>
 <!--dumping data requires string interpolation sed if within tag, can use string interpolation instead, see h4 contents vs img.alt content-->
-
-
-          <!-- *ngFor="let server of servers | filter:filteredStatus:'status' | sort:'name'" -->

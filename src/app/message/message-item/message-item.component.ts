@@ -11,7 +11,6 @@ export class MessageItemComponent implements OnInit {
   messageSender: string = '';
 @Input() message: Message;
   constructor(private messageService: MessageService) { }
-
   ngOnInit(): void {
     const message: Message = this.messageService.getMessage(this.message.id);
     this.messageSender = message.sender;

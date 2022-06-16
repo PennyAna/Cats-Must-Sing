@@ -34,9 +34,7 @@ export class DocumentEditComponent implements OnInit {
     }
     this.router.navigate(["../document"]);
     }
-  constructor(private documentService: DocumentService, private router: Router, private route: ActivatedRoute) { 
-
-  }
+  constructor(private documentService: DocumentService, private router: Router, private route: ActivatedRoute) { }
  ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);

@@ -9,7 +9,6 @@ import { Message } from '../message.model';
 export class MessageDetailComponent implements OnInit {
 @Input() selectedMessage: Message;
   constructor() { }
-
   ngOnInit(): void {
   }
 

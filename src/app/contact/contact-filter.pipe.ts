@@ -21,5 +21,5 @@ export class ContactFilterPipe implements PipeTransform {
       }
             return filteredContacts;
   }
-
 }
+
