@@ -4,12 +4,14 @@ module.exports = router;
 const sequenceGenerator = require('./sequenceGenerator');
 const Message = require('../models/message');
 
-//GET
-router.get('/',(req,res,next) => {
-    Message.find().then(messages => {
+//GET1
+router.get('/:id',(req,res,next) => {
+    Message.findOne({'id':req.params.id}).populate('sender')
+    .then(message => {
         res.status(200).json({
         message: "Message Fetch", 
-        posts: 'messages'});
+        messages: message
+    });
     })
     .catch(error=> {
         res.status(500).json({
@@ -18,11 +20,29 @@ router.get('/',(req,res,next) => {
         });
     });
 });
+//GETOMNES
+router.get('/',(req,res,next) => {
+    Message.find()
+    .populate('sender')
+    .then(messages => {
+        res.status(200).json({
+            message: 'Messages fetched successfully!', 
+            messages: messages
+        });
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: 'An error occurred', 
+            error: error
+        });
+    });
+});
+
 //POST
 router.post('/',(req, res, next) => {
     const maxMessageId = sequenceGenerator.nextId("messages");
     const message = newMessage({
-        id: maxContactId, 
+        id: maxMessageId, 
         subject: req.body.subject, 
         msgText: req.body.msgText,
         sender: req.body.sender

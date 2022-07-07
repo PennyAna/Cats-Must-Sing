@@ -3,11 +3,25 @@ var router = express.Router();
 module.exports = router; 
 const sequenceGenerator = require('./sequenceGenerator');
 const Contact = require('../models/contact');
-
-//GET
+//GET1
+router.get('/:id',(req, res, next) => {
+    Contact.findOne({'id': req.params.id}).populate('name')
+    .then(contact => {
+        res.status(200).json({
+            message: 'Contact Fetch',
+            contact: contact
+        });
+    })
+    .catch(error=> {
+        res.status(500).json({
+            message: 'An error occurred', 
+            error: error
+        });
+    });
+});
+//GETOMNES
 router.get('/',(req,res,next) => {
-    Contact.find()
-    .populate('group')
+    Contact.find().populate('name')
     .then(contacts => {
         res.status(200).json({
             message: 'Contacts fetched Successfully!', 

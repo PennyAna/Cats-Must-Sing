@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <a [routerLink]="['/message', message?.id]" class="list-group-item clearfix">
   <div class="">
-    <span class="messageHeader">{{ message?.sender }}</span>
+    <span class="messageHeader">{{ message?.sender.name }}</span>
     <div class="messageText">{{ message?.msgText }}</div>
   </div>
 </a>

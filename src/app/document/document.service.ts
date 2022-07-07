@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Document } from './document.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,34 +15,21 @@ maxId: number;
 currentId: number;
 maxDocumentId: number;
 documentsListClone: Document[] = [];
-getMaxId(): number {
-  this.maxId = 0;
-this.documents.forEach(document => {
-  this.currentId = parseInt(document.id);
-  if (this.currentId > this.maxId) {
-    this.maxId = this.currentId;
-  }})
-  return this.maxId;
-}
 getDocuments() {
-  this.http.get('http://localhost:3000/documents')
+  this.http.get<{message: string, documents: Document[]}>('http://localhost:3000/document/')
   .subscribe(
     //success method
-    (documents: Document[]) => {
-      this.documents = documents;
-      this.maxDocumentId = this.getMaxId();
-      this.documents.sort((a, b) => 
-       a.name > b.name ? 1 : b.name >  a.name ? -1 : 0
-      );    
-      this.documentListChangedEvent.next(this.documents.slice()); 
+          (responseData) => {
+            this.documents = responseData.documents;
+          this.sortAndSend();
     }, //error function
     (error: any) => {
       console.log(error);
     });
 }
-getDocument(id:string): Document {
-  return this.documents.find(document =>  document.id === id)
-}   
+getDocument(id:string) {
+  return this.http.get<{ message: string, document:Document }>('http://localhost:3000/document/ ' +id);
+}  
 deleteDocument(document: Document) {
   if(!document) {
     return;
@@ -53,7 +39,7 @@ deleteDocument(document: Document) {
     return;
   }
   //delete from db
-  this.http.delete('http://localhost:3000/documents/' + document.id)
+  this.http.delete('http://localhost:3000/document/' + document.id)
   .subscribe((response: Response) => {
     this.documents.splice(pos, 1);
     this.sortAndSend();
@@ -69,7 +55,7 @@ addDocument(document: Document) {
   const headers = new HttpHeaders({'Content-Type': 'application/json'});
   // add to database
   this.http.post<{ message: string, document: Document }>
-  ('http://localhost:3000/documents',
+  ('http://localhost:3000/document',
     document,
     { headers: headers })
     .subscribe((responseData) => {
@@ -92,7 +78,7 @@ updateDocument(originalDoc: Document, newDoc: Document) {
   newDoc._id = originalDoc._id;
   const headers = new HttpHeaders({'Content-Type': 'application/json'});
   //update db
-  this.http.put('http://localhost:3000/documents/' + originalDoc.id, 
+  this.http.put('http://localhost:3000/document/' + originalDoc.id, 
   newDoc, {headers: headers})
   .subscribe((response: Response) => {
     this.documents[pos] = newDoc;
@@ -100,7 +86,10 @@ updateDocument(originalDoc: Document, newDoc: Document) {
   }
   );
 }
+sortAndSend() {
+  this.documents.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 :0);
+  this.documentListChangedEvent.next(this.documents.slice());
+ }
 constructor(private http: HttpClient) { 
-  this.maxDocumentId = this.getMaxId();
 }
 }

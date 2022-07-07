@@ -4,12 +4,14 @@ module.exports = router;
 const sequenceGenerator = require('./sequenceGenerator');
 const Document = require('../models/document');
 
-//GET
-router.get('/',(req,res,next) => {
-    Document.find().then(documents => {
+//GET1
+router.get('/:id',(req, res, next) => {
+    Document.findOne({'id': req.params.id}).populate('name')
+    .then(document => {
         res.status(200).json({
-        message: "Document Fetch", 
-        posts: documents});
+            message: 'Document Fetch',
+            document: document
+        });
     })
     .catch(error=> {
         res.status(500).json({
@@ -18,6 +20,22 @@ router.get('/',(req,res,next) => {
         });
     });
 });
+//GETOMNES
+router.get('/',(req,res,next) => {
+    Document.find().populate('name')
+    .then(documents => {
+        res.status(200).json({
+        message: "Documents fetched successfully!", 
+        documents: documents});
+    })
+    .catch(error=> {
+        res.status(500).json({
+            message: 'An error occurred', 
+            error: error
+        });
+    });
+});
+
 //POST
 router.post('/',(req, res, next) => {
     const maxDocumentId = sequenceGenerator.nextId("documents");

@@ -11,48 +11,45 @@ export class MessageService {
   messageChangedEvent = new EventEmitter<Message[]>();
    messageSelectedEvent = new EventEmitter<Message>();
   currentMessageId: number;
-   storeMessages() {
-    let messages = JSON.stringify(this.messages);
-    const headers = new HttpHeaders({'Content-Type':'application/json'});
-    this.http.put('https://wdd430-s22-default-rtdb.firebaseio.com/messages.json', messages, {headers: headers, })
-    .subscribe(() => {
-      this.messageChangedEvent.next(this.messages.slice());
-    });
-  }
-  getMaxId(): number {
-    this.maxMessageId = 0;
-  this.messages.forEach(message => {
-    this.currentMessageId = parseInt(message.id);
-    if (this.currentMessageId > this.maxMessageId) {
-      this.maxMessageId = this.currentMessageId;
-    }})
-    return this.maxMessageId;
-  }
    getMessages() {
-    this.http.get('https://wdd430-s22-default-rtdb.firebaseio.com/messages.json')
+    this.http.get<{message: string, messages: Message[]}>('http://localhost:3000/message/')
     .subscribe(
       //success method
-      (messages: Message[]) => {
-        this.messages = messages;
-        console.log(this.messages);
-        this.maxMessageId = this.getMaxId();
-        console.log(this.maxMessageId);
-        this.messageChangedEvent.next(this.messages.slice());
+      (responseData) => {
+        this.messages = responseData.messages;
+        this.sortAndSend();
       }, //error function
       (error: any) => {
         console.log(error);
       });
    }
-   getMessage(id: string): Message {
-     return this.messages.find(message => message.id === id);
+   getMessage(id: string) {
+    return this.http.get<{ message: string, messages: Message }>('http://localhost:3000/message/ ' +id);
    }
-   addMessage(message: Message) {
-    this.messages.push(message);
-    this.messageChangedEvent.emit(this.messages.slice());
-    this.storeMessages();
-  }
+   addMessage(msgIn: Message) {
+    if(!msgIn) {
+      return;
+    }
+    //make sure id of new msg empty
+    msgIn.id = '';
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    //add to db
+    this.http.post<{message: string, messages: Message}>
+    ('http://localhost:3000/message',
+    msgIn, 
+    {headers: headers})
+    .subscribe((responseData) => {
+      //add new to contacts
+      this.messages.push(responseData.messages);
+      this.sortAndSend();
+    }
+    );
+   }
+   sortAndSend() {
+    this.messages.sort((a, b) => a.sender > b.sender ? 1 : b.sender > a.sender ? -1 :0);
+    this.messageChangedEvent.next(this.messages.slice());
+   }
    constructor(private http: HttpClient) {
-    this.maxMessageId = this.getMaxId();
    }
 }
 

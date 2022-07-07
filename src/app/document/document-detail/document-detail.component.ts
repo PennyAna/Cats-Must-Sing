@@ -28,8 +28,8 @@ export class DocumentDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);
-      this.document = this.documentService.getDocument(this.id);
-    });
+     this.documentService.getDocument(this.id);
+     })
     this.nativeWindow = this.windowRefService.getNativeWindow();
   }
 }

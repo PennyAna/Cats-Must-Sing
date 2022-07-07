@@ -12,7 +12,6 @@ export class ContactDetailComponent implements OnInit {
   selectedContact: Contact;
   groupContact: Contact[];
   id: string;
-  //contact: Contact = new Contact('1', 'R. Kent Jackson', 'jacksonk@byui.edu', '208-496-3771', '../../../assets/images/jacksonk.jpg', null);
   onDelete() {
     this.contactService.deleteContact(this.selectedContact);
 //route back to '/documents' URL
@@ -21,7 +20,9 @@ export class ContactDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);
-      this.selectedContact = this.contactService.getContact(this.id);
+     this.contactService.getContact(this.id).subscribe(cData => {
+      this.selectedContact = cData.contact;
+     })
     });
   }
 

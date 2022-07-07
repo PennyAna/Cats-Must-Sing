@@ -1,19 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ContactService } from 'src/app/contact/contact.service';
 import { Message } from '../message.model';
-import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cms-message-item',
   templateUrl: './message-item.component.html',
-  styleUrls: ['./message-item.component.css']
+  styleUrls: ['./message-item.component.css'],
 })
 export class MessageItemComponent implements OnInit {
   messageSender: string = '';
-@Input() message: Message;
-  constructor(private messageService: MessageService) { }
+  @Input() message: Message;
+  constructor(private contactService: ContactService) {}
   ngOnInit(): void {
-    const message: Message = this.messageService.getMessage(this.message.id);
-    this.messageSender = message.sender;
+    this.contactService
+      .getContact(this.message.sender.id)
+      .subscribe((contactData) => {
+        this.messageSender = contactData.contact.name;
+      });
   }
-
 }
