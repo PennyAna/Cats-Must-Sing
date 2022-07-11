@@ -28,7 +28,9 @@ getDocuments() {
     });
 }
 getDocument(id:string) {
-  return this.http.get<{ message: string, document:Document }>('http://localhost:3000/document/ ' +id);
+  console.log(id);
+  console.log("bubbles");
+  return this.http.get<{ message: string, document: Document }>('http://localhost:3000/document/ ' +id);
 }  
 deleteDocument(document: Document) {
   if(!document) {

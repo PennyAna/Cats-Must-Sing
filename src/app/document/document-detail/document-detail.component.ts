@@ -28,8 +28,27 @@ export class DocumentDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);
-     this.documentService.getDocument(this.id);
+      console.log(this.id);
+      console.log("bubbles");
+     this.documentService.getDocument(this.id).subscribe(dData => {
+      this.document = dData.document;
+      console.log(dData);
+     })
      })
     this.nativeWindow = this.windowRefService.getNativeWindow();
   }
 }
+/* 
+    this.route.params.subscribe((params: Params) => {
+      this.id = String(+params['id']);
+     this.contactService.getContact(this.id).subscribe(cData => {
+      this.selectedContact = cData.contact;
+     })
+    });
+
+
+this.documentService.documentListChangedEvent.subscribe((documentsList: Document[])=> {
+  this.documents = documentsList;
+});
+this.documentService.getDocuments();
+} */
