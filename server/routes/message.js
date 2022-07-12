@@ -6,7 +6,8 @@ const Message = require('../models/message');
 
 //GET1
 router.get('/:id',(req,res,next) => {
-    Message.findOne({'id':req.params.id}).populate('sender')
+    const query = {'id':req.params.id};
+    Message.findOne(query).populate('sender')
     .then(message => {
         res.status(200).json({
         message: "Message Fetch", 
@@ -41,7 +42,7 @@ router.get('/',(req,res,next) => {
 //POST
 router.post('/',(req, res, next) => {
     const maxMessageId = sequenceGenerator.nextId("messages");
-    const message = newMessage({
+    const message = new Message({
         id: maxMessageId, 
         subject: req.body.subject, 
         msgText: req.body.msgText,
@@ -51,7 +52,7 @@ router.post('/',(req, res, next) => {
     .then(createdMessage => {
         res.status(201).json({
             message: 'Message added successfully', 
-            document: createdMessage
+            document: message
         });
     })
     .catch(error=> {
@@ -63,14 +64,15 @@ router.post('/',(req, res, next) => {
 });
 //PUT
 router.put('/:id', (req, res, next) => {
-    Message.findOne({id: req.params.id})
+    const query = {'id':req.params.id};
+    Message.findOne(query)
     .then(message => {
         message.name = req.body.name,
         message.subject = req.body.subject,
         message.msgText = req.body.msgText,
         message.sender = req.body.sender
 
-        Message.updateOne({id: req.params.id}, message)
+        Message.updateOne(query, message)
         .then(result => {
             res.status(204).json({
                 message: 'Message updated successfully'
@@ -92,9 +94,10 @@ router.put('/:id', (req, res, next) => {
 });
 //DELETE
 router.delete('/:id', (req, res, next) => {
-    Message.findOne({id: req.params.id})
+    const query = {'id':req.params.id};
+    Message.findOne(query)
     .then(message => {
-        Message.deleteOne({id: req.params.id})
+        Message.deleteOne(query)
         .then(result => {
             res.status(204).json({
                 message: 'Message deleted successfully'

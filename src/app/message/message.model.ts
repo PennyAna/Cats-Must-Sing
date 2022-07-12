@@ -1,5 +1,4 @@
 import { Contact } from "../contact/contact.model";
-
 export class Message {
     public _id: string;
     public id: string;

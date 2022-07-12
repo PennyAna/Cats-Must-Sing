@@ -10,8 +10,7 @@ import { DocumentService } from '../document.service';
 })
 export class DocumentListComponent implements OnInit {
 documents: Document[] = [];
-documentId: string = '';
-  constructor(private documentService: DocumentService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private documentService: DocumentService) { }
   ngOnInit(): void {
 this.documentService.documentListChangedEvent.subscribe((documentsList: Document[])=> {
     this.documents = documentsList;

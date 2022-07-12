@@ -25,6 +25,7 @@ export class DocumentEditComponent implements OnInit {
     this.nameInput = f.value.name;
     this.descriptionInput = f.value.description;
     this.urlInput = f.value.url;
+
     this.newDocument = new Document(null, this.nameInput, this.descriptionInput, this.urlInput, null);
     if (this.editMode === true) {
       this.documentService.updateDocument(this.originalDocument, this.newDocument);
@@ -32,22 +33,17 @@ export class DocumentEditComponent implements OnInit {
     else {
       this.documentService.addDocument(this.newDocument);
     }
-    this.router.navigate(["../document"]);
+    this.onCancel();
     }
   constructor(private documentService: DocumentService, private router: Router, private route: ActivatedRoute) { }
  ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);
-      if(!this.id){
-        this.editMode = false;
-        return;
-      }
-        this.documentService.getDocument(this.id);
-        if(!this.originalDocument) {
-          return;
-        }
-        this.editMode = true;
-        this.document = JSON.parse(JSON.stringify(this.originalDocument));
+      this.editMode = params['id'] != null;
       });
-}
+      this.documentService.getDocument(this.id)
+      .subscribe(doc => {
+        this.originalDocument = doc.document;
+      });
+    }
 }

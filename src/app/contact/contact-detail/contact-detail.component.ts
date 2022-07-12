@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
@@ -16,7 +16,8 @@ export class ContactDetailComponent implements OnInit {
     this.contactService.deleteContact(this.selectedContact);
 //route back to '/documents' URL
     this.router.navigate(["../contact"])
-  }constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) { }
+  }
+  constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);

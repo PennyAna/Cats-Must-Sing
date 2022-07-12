@@ -3,9 +3,11 @@ var router = express.Router();
 module.exports = router; 
 const sequenceGenerator = require('./sequenceGenerator');
 const Contact = require('../models/contact');
+
 //GET1
 router.get('/:id',(req, res, next) => {
-    Contact.findOne({'id': req.params.id}).populate('name')
+    const query = {'id':req.params.id};
+    Contact.findOne(query).populate('group')
     .then(contact => {
         res.status(200).json({
             message: 'Contact Fetch',
@@ -21,7 +23,7 @@ router.get('/:id',(req, res, next) => {
 });
 //GETOMNES
 router.get('/',(req,res,next) => {
-    Contact.find().populate('name')
+    Contact.find().populate('group')
     .then(contacts => {
         res.status(200).json({
             message: 'Contacts fetched Successfully!', 
@@ -38,8 +40,8 @@ router.get('/',(req,res,next) => {
 //POST
 router.post('/',(req, res, next) => {
     const maxContactId = sequenceGenerator.nextId("contacts");
-    const contact = newContact({
-        id: maxContactId, 
+    const contact = new Contact({
+        id:  maxContactId, 
         name: req.body.name, 
         email: req.body.email, 
         phone: req.body.phone,
@@ -60,17 +62,33 @@ router.post('/',(req, res, next) => {
         });
     });
 });
+/* //PUT
+router.put('/:id', (req, res, next) => {
+    const query = {id: req.params.id};
+      Document.findOne(query)
+        .then(document => {
+          document.name = req.body.name;
+          document.description = req.body.description;
+          document.url = req.body.url;
+          Document.updateOne(query, document)
+            .then(result => {
+              res.status(204).json({
+                message: 'Document updated successfully'
+              })
+            }) */
 //PUT
 router.put('/:id', (req, res, next) => {
-    Contact.findOne({id: req.params.id})
+    console.log(req.body);
+    const query = {id:req.params.id};
+    Contact.findOne(query)
     .then(contact => {
-        id: maxContactId, 
+        contact.id = req.body.id, 
         contact.name = req.body.name, 
         contact.email = req.body.email, 
         contact.phone = req.body.phone,
         contact.imageUrl = req.body.imageUrl,
         contact.group = req.body.group
-        Contact.updateOne({id: req.params.id}, contact)
+        Contact.updateOne(query, contact)
         .then(result => {
             res.status(204).json({
                 message: 'Contact updated successfully'
@@ -92,9 +110,10 @@ router.put('/:id', (req, res, next) => {
 });
 //DELETE
 router.delete('/:id', (req, res, next) => {
-    Contact.findOne({id: req.params.id})
+    const query = {'id':req.params.id};
+    Contact.findOne(query)
     .then(contact => {
-        Contact.deleteOne({id: req.params.id})
+        Contact.deleteOne(query)
         .then(result => {
             res.status(204).json({
                 message: 'Contact deleted successfully'

@@ -6,13 +6,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MessageService {
+  private url = 'http://localhost:3000/message/';
   maxMessageId: number;
   messages: Message[] = [];
   messageChangedEvent = new EventEmitter<Message[]>();
    messageSelectedEvent = new EventEmitter<Message>();
   currentMessageId: number;
    getMessages() {
-    this.http.get<{message: string, messages: Message[]}>('http://localhost:3000/message/')
+    this.http.get<{message: string, messages: Message[]}>(this.url)
     .subscribe(
       //success method
       (responseData) => {
@@ -24,7 +25,7 @@ export class MessageService {
       });
    }
    getMessage(id: string) {
-    return this.http.get<{ message: string, messages: Message }>('http://localhost:3000/message/ ' +id);
+    return this.http.get<{ message: string, messages: Message }>(this.url +id);
    }
    addMessage(msgIn: Message) {
     if(!msgIn) {
@@ -35,7 +36,7 @@ export class MessageService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     //add to db
     this.http.post<{message: string, messages: Message}>
-    ('http://localhost:3000/message',
+    (this.url,
     msgIn, 
     {headers: headers})
     .subscribe((responseData) => {
@@ -44,6 +45,7 @@ export class MessageService {
       this.sortAndSend();
     }
     );
+    this.getMessages();
    }
    sortAndSend() {
     this.messages.sort((a, b) => a.sender > b.sender ? 1 : b.sender > a.sender ? -1 :0);

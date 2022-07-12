@@ -25,14 +25,11 @@ export class DocumentDetailComponent implements OnInit {
   } 
   constructor(private documentService: DocumentService, private router: Router, private route: ActivatedRoute, private windowRefService: WindRefService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);
-      console.log(this.id);
-      console.log("bubbles");
      this.documentService.getDocument(this.id).subscribe(dData => {
       this.document = dData.document;
-      console.log(dData);
      })
      })
     this.nativeWindow = this.windowRefService.getNativeWindow();

@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import { Subject, throwIfEmpty } from 'rxjs';
+import { Subject} from 'rxjs';
 import { Contact } from './contact.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
+  private url = 'http://localhost:3000/contact/';
   contacts: Contact[] = [];
   contactSelectedEvent = new EventEmitter<Contact>();
   contactChangedEvent = new EventEmitter<Contact[]>();
@@ -17,7 +18,7 @@ export class ContactService {
   contactsListClone: Contact[];
 
   getContacts() {
-    this.http.get<{message: string, contacts: Contact[]}>('http://localhost:3000/contact/')
+    this.http.get<{message: string, contacts: Contact[]}>(this.url)
     .subscribe(
       //success method
       (responseData) => {
@@ -29,7 +30,7 @@ export class ContactService {
       });
   }
   getContact(id: string) {
-    return this.http.get<{ message: string, contact:Contact }>('http://localhost:3000/contact/ ' +id);
+    return this.http.get<{ message: string, contact:Contact }>(this.url +id);
     }
     deleteContact(contact: Contact) {
       if(!contact) {
@@ -40,7 +41,7 @@ export class ContactService {
         return;
       }
       //delete from db
-      this.http.delete('http://localhost:3000/contact/' + contact.id)
+      this.http.delete(this.url + contact.id)
       .subscribe((response: Response) => {
         this.contacts.splice(pos, 1);
         this.sortAndSend();
@@ -56,17 +57,20 @@ export class ContactService {
   const headers = new HttpHeaders({'Content-Type':'application/json'});
   //add to db
   this.http.post<{message: string, contact: Contact}>
-  ('http://localhost:3000/contact/', 
-  document, 
-  {headers: headers})
+  (this.url, 
+  contact, 
+  { headers: headers })
   .subscribe((responseData) => {
     //add new to contacts
     this.contacts.push(responseData.contact);
     this.sortAndSend();
   }
   );
+  this.getContacts();
 }
 updateContact(originalCon: Contact, newCon: Contact) {
+  console.log(originalCon);
+  console.log(newCon);
   if(!originalCon || !newCon){
     return;
   }
@@ -79,7 +83,7 @@ updateContact(originalCon: Contact, newCon: Contact) {
   newCon._id = originalCon._id;
   const headers = new HttpHeaders({'Content-Type': 'application/json'});
   //update db
-  this.http.put('http://localhost:3000/contact/' + originalCon.id, 
+  this.http.put(this.url + originalCon.id, 
   newCon, {headers: headers})
   .subscribe((response: Response) => {
     this.contacts[pos] = newCon;

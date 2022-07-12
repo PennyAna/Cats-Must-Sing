@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ContactService } from 'src/app/contact/contact.service';
@@ -10,18 +10,17 @@ import { Contact } from '../contact.model';
   styleUrls: ['./contact-edit.component.css'],
 })
 export class ContactEditComponent implements OnInit {
-  @Input() selectedContact: Contact;
-  originalContact: Contact;
   contact: Contact;
-  id: string;
-  editMode: boolean = false;
+  originalContact: Contact;
+  newContact: Contact;
   groupContacts: Contact[];
+  editMode: boolean = false;
+  id: string;
   invalidFlag: boolean;
   nameInput: string;
   emailInput: string;
   phoneInput: string;
   imageInput: string;
-  newContact: Contact;
   addToGroup($event: any) {
     const selectedContact: Contact = $event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
@@ -56,51 +55,35 @@ export class ContactEditComponent implements OnInit {
   onCancel() {
     this.router.navigate(['../contact']);
   }
-  onSubmit(f: NgForm) {
+  onSubmit(f: NgForm) {  
+    this.id = this.originalContact.id;
     this.nameInput = f.value.name;
     this.emailInput = f.value.email;
     this.phoneInput = f.value.phone;
-    this.imageInput = f.value.imageUrl;
-    this.newContact = new Contact(
-      null,
-      this.nameInput,
-      this.emailInput,
-      this.phoneInput,
-      this.imageInput,
-      null
-    );
+    this.imageInput = f.value.imageUrl ? f.value.imageUrl : "assets/images/fredFlintstone.png";
+    this.groupContacts = f.value.group ? f.value.group : null;
+
+    this.newContact = new Contact(this.id, this.nameInput, this.emailInput, this.phoneInput, this.imageInput, this.groupContacts);
+     (this.newContact);
+
     if (this.editMode === true) {
+       (this.originalContact);
       this.contactService.updateContact(this.originalContact, this.newContact);
     } else {
       this.contactService.addContact(this.newContact);
     }
-    this.router.navigate(['../contact']);
+
+    this.onCancel();
   }
-  constructor(
-    private contactService: ContactService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) {}
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = String(+params['id']);
-      if (!this.id) {
-        this.editMode = false;
-        return;
-      }
-      this.contactService.getContact(this.id).subscribe((cData) => {
-        this.selectedContact = cData.contact;
-        if (!this.originalContact) {
-          return;
-        }
-        this.editMode = true;
-        this.contact = JSON.parse(JSON.stringify(this.originalContact));
-        if (this.contact.group) {
-          this.groupContacts = JSON.parse(
-            JSON.stringify(this.originalContact.group)
-          );
-        }
-      });
+      this.editMode = params['id'] != null;
+    });
+    this.contactService.getContact(this.id)
+    .subscribe((cData) => {
+        this.originalContact = cData.contact;     
     });
   }
 }
