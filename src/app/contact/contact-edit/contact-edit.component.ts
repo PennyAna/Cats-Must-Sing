@@ -21,6 +21,8 @@ export class ContactEditComponent implements OnInit {
   emailInput: string;
   phoneInput: string;
   imageInput: string;
+
+
   addToGroup($event: any) {
     const selectedContact: Contact = $event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
@@ -56,7 +58,6 @@ export class ContactEditComponent implements OnInit {
     this.router.navigate(['../contact']);
   }
   onSubmit(f: NgForm) {  
-    this.id = this.originalContact.id;
     this.nameInput = f.value.name;
     this.emailInput = f.value.email;
     this.phoneInput = f.value.phone;
@@ -64,15 +65,13 @@ export class ContactEditComponent implements OnInit {
     this.groupContacts = f.value.group ? f.value.group : null;
 
     this.newContact = new Contact(this.id, this.nameInput, this.emailInput, this.phoneInput, this.imageInput, this.groupContacts);
-     (this.newContact);
 
     if (this.editMode === true) {
-       (this.originalContact);
+      this.newContact.id = this.originalContact.id;
       this.contactService.updateContact(this.originalContact, this.newContact);
     } else {
       this.contactService.addContact(this.newContact);
     }
-
     this.onCancel();
   }
   constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) {}
@@ -83,7 +82,7 @@ export class ContactEditComponent implements OnInit {
     });
     this.contactService.getContact(this.id)
     .subscribe((cData) => {
-        this.originalContact = cData.contact;     
+        this.originalContact = cData.contact;    
     });
   }
 }

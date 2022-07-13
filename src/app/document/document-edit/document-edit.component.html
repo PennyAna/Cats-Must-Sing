@@ -17,7 +17,7 @@
               max="120"
               [ngModel]="document?.name"
               #name="ngModel"
-              [placeholder]="originalDocument?.name">
+              [value]="originalDocument?.name">
               <span [ngStyle]="{'border':!name.invalid ? '1px solid red' : '1px solid black', 'display':!name.invalid || name.pristine ? 'none' : 'block'}">
                 <div class="alert alert-danger">Document name is required.</div>
                 </span>
@@ -36,7 +36,7 @@
               max="255"
               [ngModel]="document?.description"
               #description="ngModel"
-              [placeholder]="originalDocument?.description">
+              [value]="originalDocument?.description">
                  </div>
         <div class="row">
           <div class="col-sm-12 form-group">
@@ -52,7 +52,7 @@
               max="255"
               [ngModel]="document?.url"
               #url="ngModel"
-              [placeholder]="originalDocument?.url">
+              [value]="originalDocument?.url">
               <span [ngStyle]="{'border':url.invalid ? '1px solid red' : '1px solid black', 'display':!url.invalid || url.pristine ? 'none' : 'block'}">
                 <div class="alert alert-danger">Document URL is required.</div>
                 </span>

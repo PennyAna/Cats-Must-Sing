@@ -18,11 +18,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown" cmsDropDown #r="cmsDropDown">
-            <a style="cursor: pointer;" class="dropdown-toggle" role="button">User <span class="caret"></span></a>
+            <a style="cursor: pointer;" class="dropdown-toggle" role="button">DropDown<span class="caret"></span></a>
             <ul class="dropdown-menu" [ngClass]="{'show':r.isOpen}">
-              <li><a (click)="onLogIn()">LogIn</a></li>
-              <li><a (click)="onOther()">Other</a></li>
-              <li><a (click)="onLogOut()">LogOut</a></li>
+              <li><a (click)="onLogIn()">Useless Link</a></li>
+              <li><a (click)="onOther()">Other Link</a></li>
+              <li><a (click)="onLogOut()">Tricky Link</a></li>
             </ul>
             </li>
             </ul>
