@@ -69,8 +69,6 @@ export class ContactService {
   this.getContacts();
 }
 updateContact(originalCon: Contact, newCon: Contact) {
-  console.log(originalCon);
-  console.log(newCon);
   if(!originalCon || !newCon){
     return;
   }
